@@ -34,6 +34,7 @@ for row in comb:
     lab[z1][z2] = 1
     templab = lab
 
+## 고치는중
     while templab != lab:
         for i in range(0, len(virus)):
             vx, vy = virus[i].split(' ')
