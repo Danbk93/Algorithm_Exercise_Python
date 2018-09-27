@@ -1,22 +1,27 @@
 from itertools import combinations
+import copy
 
 a, b = map(int,input().split(' '))
 
 lab = [[int(x) for x in input().split()]for y in range(a)]
 test_lab = [[0 for col in range(b)] for row in range(a)]
 
+
 count = 0
 best_count = 0
 
 zero =[]
-virus =[]
+viruslist =[]
 
 dx = [0, 0, -1, 1]
 dy = [-1, 1, 0, 0]
 
-for i in range(0,a):
-    for j in range(0,b):
-        test_lab[i][j] = lab[i][j]
+for i in range(0, a):
+    for j in range(0, b):
+        if lab[i][j] == 2:
+            viruslist.append(str(i)+' '+str(j))
+
+test_lab = copy.deepcopy(lab)
 
 
 def virus(vx, vy):
@@ -46,10 +51,9 @@ for row in comb:
     test_lab[y1][y2] = 1
     test_lab[z1][z2] = 1
 
-    for i in range(0, a):
-        for j in range(0, b):
-            if test_lab[i][j] == 2:
-                virus(i, j)
+    for row in viruslist:
+        x, y = map(int, row.split(' '))
+        virus(x, y)
 
     # for row in test_lab:
     #     print(row)
@@ -65,9 +69,8 @@ for row in comb:
 
     count = 0
 
-    for i in range(0, a):
-        for j in range(0, b):
-            test_lab[i][j] = lab[i][j]
+    test_lab = copy.deepcopy(lab)
+
 
 print(best_count)
 
